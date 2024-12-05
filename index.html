@@ -103,24 +103,30 @@
         if (numero) {
             document.getElementById('numero-display').textContent = numero;
 
-            // Enviar el número al formulario de Google Forms
+            // Obtener la fecha y hora actuales
+            const currentDate = new Date();
+            const fecha = currentDate.toLocaleString();  // Puedes modificar el formato si lo prefieres
+
+            // Enviar el número y la fecha al formulario de Google Forms
             const formUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSe3d__GAVdmtMyuh6WEpFSVlWpC-DwPcnIPI_IP8E6tJGxewg/formResponse'; // Reemplaza con la URL de tu Google Form
             const formData = new FormData();
-            formData.append('entry.XXXXXX', numero);  // Reemplaza 'entry.XXXXXX' con el nombre de la pregunta en tu formulario
-           
+            formData.append('entry.XXXXXX', numero);  // Reemplaza 'entry.XXXXXX' con el nombre de la pregunta para el número
+            formData.append('entry.YYYYYY', fecha);  // Reemplaza 'entry.YYYYYY' con el nombre de la pregunta para la fecha
+
             fetch(formUrl, {
                 method: 'POST',
                 body: formData,
             })
             .then(response => response.json())
             .then(data => {
-                console.log("Número registrado:", data);
+                console.log("Número y fecha registrados:", data);
             })
             .catch(error => {
-                console.error("Error al registrar el número:", error);
+                console.error("Error al registrar los datos:", error);
             });
         }
     </script>
 </body>
 
 </html>
+
