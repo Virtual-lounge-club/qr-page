@@ -1,12 +1,81 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mostrar Número</title>
+    <style>
+        /* Estilo general para la página */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+
+        /* Contenedor para el contenido */
+        .content {
+            text-align: center;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            width: 80%;
+            max-width: 600px;
+        }
+
+        /* Estilo para el logotipo */
+        #logo {
+            max-width: 150px;
+            margin-bottom: 20px;
+        }
+
+        /* Estilo para el encabezado */
+        h1 {
+            font-size: 2em;
+            color: #333;
+            margin-top: 0;
+        }
+
+        /* Estilo para el número */
+        #numero {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        /* Estilo para el fondo */
+        .background {
+            background-color: #3498db;
+            color: white;
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+    </style>
 </head>
+
 <body>
-    <h1 id="numero">Cargando...</h1>
+    <div class="content">
+        <!-- Logo de la página -->
+        <img id="logo" src="LOGO.png" alt="Logotipo">
+
+        <!-- Mostrar el número -->
+        <h1 id="numero">Cargando...</h1>
+
+        <!-- Mensaje con el número -->
+        <div class="background">
+            <p>¡El número es:</p>
+            <p id="numero-display">Cargando...</p>
+            <p>!</p>
+        </div>
+    </div>
 
     <script>
         // Obtener el parámetro "numero" de la URL
@@ -15,8 +84,9 @@
         
         // Mostrar el número en la página
         if (numero) {
-            document.getElementById('numero').textContent = `El número es: ${numero}`;
+            document.getElementById('numero-display').textContent = numero;
         }
     </script>
 </body>
+
 </html>
