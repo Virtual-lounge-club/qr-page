@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -77,7 +76,6 @@
         }
     </style>
 </head>
-
 <body>
     <div class="content">
         <!-- Logo de la página -->
@@ -97,36 +95,35 @@
     <script>
         // Obtener el parámetro "numero" de la URL
         const urlParams = new URLSearchParams(window.location.search);
-        const numero = urlParams.get('numero');  // Obtener el valor de "numero"
-        
+        const numero = urlParams.get('numero');  // El número escaneado
+
         // Mostrar el número en la página
         if (numero) {
             document.getElementById('numero-display').textContent = numero;
-
-            // Obtener la fecha y hora actuales
-            const currentDate = new Date();
-            const fecha = currentDate.toLocaleString();  // Puedes modificar el formato si lo prefieres
-
-            // Enviar el número y la fecha al formulario de Google Forms
-            const formUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSe3d__GAVdmtMyuh6WEpFSVlWpC-DwPcnIPI_IP8E6tJGxewg/formResponse'; // Reemplaza con la URL de tu Google Form
-            const formData = new FormData();
-            formData.append('entry.XXXXXX', numero);  // Reemplaza 'entry.XXXXXX' con el nombre de la pregunta para el número
-            formData.append('entry.YYYYYY', fecha);  // Reemplaza 'entry.YYYYYY' con el nombre de la pregunta para la fecha
-
-            fetch(formUrl, {
-                method: 'POST',
-                body: formData,
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log("Número y fecha registrados:", data);
-            })
-            .catch(error => {
-                console.error("Error al registrar los datos:", error);
-            });
         }
+
+        // URL del formulario de Google (reemplázalo con la URL de tu formulario)
+        const formUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSfjZdfdX3BfG6A1Fw0ct5LVRHJnzRRyE7Jylb8zFeqprPz0zg/formResponse';
+
+        // Enviar el número al formulario de Google
+        const formData = new FormData();
+        
+        // Asumiendo que 'entry.123456' es el campo del número (reemplaza con tu identificador real)
+        formData.append('entry.123456', numero);  // El número escaneado
+
+        // Asumiendo que 'entry.7891011' es el campo donde escribimos "Número:" (reemplaza con tu identificador real)
+        formData.append('entry.7891011', 'Número:');  // Texto "Número:"
+
+        fetch(formUrl, {
+            method: 'POST',
+            body: formData,
+        })
+        .then(response => {
+            console.log("Número enviado correctamente al formulario.");
+        })
+        .catch(error => {
+            console.error("Error al enviar los datos al formulario:", error);
+        });
     </script>
 </body>
-
 </html>
-
