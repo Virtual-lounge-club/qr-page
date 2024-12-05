@@ -102,6 +102,23 @@
         // Mostrar el número en la página
         if (numero) {
             document.getElementById('numero-display').textContent = numero;
+
+            // Enviar el número al formulario de Google Forms
+            const formUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSe3d__GAVdmtMyuh6WEpFSVlWpC-DwPcnIPI_IP8E6tJGxewg/formResponse'; // Reemplaza con la URL de tu Google Form
+            const formData = new FormData();
+            formData.append('entry.XXXXXX', numero);  // Reemplaza 'entry.XXXXXX' con el nombre de la pregunta en tu formulario
+           
+            fetch(formUrl, {
+                method: 'POST',
+                body: formData,
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log("Número registrado:", data);
+            })
+            .catch(error => {
+                console.error("Error al registrar el número:", error);
+            });
         }
     </script>
 </body>
