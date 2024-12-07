@@ -95,37 +95,27 @@
     </div>
 
     <script>
-        // Obtener el parámetro "numero" de la URL
-        const urlParams = new URLSearchParams(window.location.search);
-        const numero = urlParams.get('numero');  // Obtener el valor de "numero"
-        
-        // Mostrar el número en la página
-        if (numero) {
-            document.getElementById('numero-display').textContent = numero;
+    // Obtener los parámetros "numero" y "valor" de la URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const numero = urlParams.get('numero'); // Obtener el número
+    const valor = urlParams.get('valor');   // Obtener el valor
 
-            // Obtener la fecha y hora actuales
-            const currentDate = new Date();
-            const fecha = currentDate.toLocaleString();  // Puedes modificar el formato si lo prefieres
+    // Mostrar el número en la página
+    if (numero) {
+        document.getElementById('numero-display').textContent = `Cupón ${numero}`;
+    }
 
-            // Enviar el número y la fecha al formulario de Google Forms
-            const formUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSe3d__GAVdmtMyuh6WEpFSVlWpC-DwPcnIPI_IP8E6tJGxewg/formResponse'; // Reemplaza con la URL de tu Google Form
-            const formData = new FormData();
-            formData.append('Numero', numero);  // Reemplaza 'entry.XXXXXX' con el nombre de la pregunta para el número
-            formData.append('Fecha', fecha);  // Reemplaza 'entry.YYYYYY' con el nombre de la pregunta para la fecha
+    // Mostrar el valor del cupón
+    if (valor) {
+        const valorElement = document.createElement('p'); // Crear un nuevo párrafo
+        valorElement.textContent = `Valor del Cupón: ${valor}`;
+        valorElement.style.fontSize = '1.5em';
+        valorElement.style.fontWeight = 'bold';
+        valorElement.style.color = '#27ae60'; // Color verde
+        document.querySelector('.background').appendChild(valorElement); // Agregarlo debajo del número
+    }
+</script>
 
-            fetch(formUrl, {
-                method: 'POST',
-                body: formData,
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log("Número y fecha registrados:", data);
-            })
-            .catch(error => {
-                console.error("Error al registrar los datos:", error);
-            });
-        }
-    </script>
 </body>
 
 </html>
