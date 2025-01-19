@@ -9,7 +9,7 @@
         /* Estilo general para la página */
         body {
             font-family: 'Arial', sans-serif;
-            background-color: white; /* Fondo blanco */
+            background-color: white;
             margin: 0;
             padding: 0;
             display: flex;
@@ -17,7 +17,7 @@
             align-items: center;
             height: 100vh;
             flex-direction: column;
-            color: #333; /* Color de texto principal */
+            color: #333;
         }
 
         /* Contenedor para el contenido */
@@ -47,16 +47,16 @@
         }
 
         /* Estilo para el número */
-        #numero {
+        #numero-display {
             font-size: 1.8em;
             font-weight: bold;
-            color: #8e44ad; /* Color morado oscuro */
+            color: #8e44ad;
             margin-top: 15px;
         }
 
         /* Estilo para el contenedor del mensaje */
         .background {
-            background-color: darkred; /* Rojo oscuro */
+            background-color: darkred;
             color: white;
             padding: 25px;
             border-radius: 8px;
@@ -69,11 +69,12 @@
             margin: 10px 0;
         }
 
-        /* Estilo del borde de los números */
-        .background p#numero-display {
-            font-size: 2em;
+        /* Estilo para los detalles del bono */
+        .detalle-bono {
+            font-size: 1.5em;
             font-weight: bold;
-            color: #ecf0f1; /* Blanco suave */
+            color: #27ae60; /* Verde */
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -84,39 +85,37 @@
         <img id="logo" src="LOGO.png" alt="Logotipo">
 
         <!-- Encabezado -->
-        <h1>Bienvenido al sistema de números</h1>
+        <h1>Bienvenido/a a Virtual Lounge Club</h1>
 
         <!-- Mensaje con el número -->
         <div class="background">
             <p>¡El número es:</p>
             <p id="numero-display">Cargando...</p>
-            <p>!</p>
         </div>
+
+        <!-- Detalles del bono -->
+        <p id="detalle-bono" class="detalle-bono"></p>
     </div>
 
     <script>
-    // Obtener los parámetros "numero" y "valor" de la URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const numero = urlParams.get('numero'); // Obtener el número
-    const valor = urlParams.get('valor');   // Obtener el valor
+        // Obtener los parámetros de la URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const numero = urlParams.get('numero'); // Número del cupón
+        const precio = urlParams.get('precio'); // Precio del bono
+        const descripcion = urlParams.get('descripcion'); // Descripción del bono
 
-    // Mostrar el número en la página
-    if (numero) {
-        document.getElementById('numero-display').textContent = `${numero}`;
-    }
+        // Mostrar el número en la página
+        if (numero) {
+            document.getElementById('numero-display').textContent = `${numero}`;
+        }
 
-    // Mostrar el valor del cupón
-    if (valor) {
-        const valorElement = document.createElement('p'); // Crear un nuevo párrafo
-        valorElement.textContent = `Valor del Cupón: ${valor}`;
-        valorElement.style.fontSize = '1.5em';
-        valorElement.style.fontWeight = 'bold';
-        valorElement.style.color = '#27ae60'; // Color verde
-        document.querySelector('.background').appendChild(valorElement); // Agregarlo debajo del número
-    }
-</script>
-
+        // Mostrar el precio y la descripción del bono
+        if (precio && descripcion) {
+            document.getElementById('detalle-bono').textContent = `${precio} - ${descripcion}`;
+        } else {
+            document.getElementById('detalle-bono').textContent = "Detalles del bono no disponibles.";
+        }
+    </script>
 </body>
 
 </html>
-
